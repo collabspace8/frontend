@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sample.css">
+    <title>Register</title>
+</head>
+
+<body>
+    <header id="header-main">
+        <div id="list-items">
+            <a href="#">Collab Space</a>
+            <ul class="nav-list">
+                <a href="index.html">Home</a>
+                <a href="register.html">Register</a>
+                <a href="login.html">Login</a>
+            </ul>
+        </div>
+    </header>
+
+
+    <div class="login-container">
+        <form class="login-form" id="registrationForm"><br>
+            <h1>Register</h1><br>
+            <label for="fullname">Fullname: </label><br>
+            <input type="text" id="reg-fullname" name="fullname" class="input-field" required><br>
+            <label for="email">Email:</label><br>
+            <input type="text" id="reg-email" name="email" class="input-field" required
+                oninvalid="setCustomValidity('Enter a valid email address!')" oninput="setCustomValidity('')"><br>
+            <label for="phonenumber">Phone Number: </label><br>
+            <input type="text" id="reg-phonenumber" name="phonenumber" class="input-field" required><br>
+            <label for="fullname">Username: </label><br>
+            <input type="text" id="reg-username" name="username" class="input-field" required pattern=".{3,20}"
+                oninvalid="setCustomValidity('Your username must be between 3 and 20 characters')"
+                oninput="setCustomValidity('')"><br>
+            <label for="password">Password: </label><br>
+            <input type="password" id="reg-password" name="Password" class="input-field" required><br>
+            <label for="access">User Access</label><br>
+            <select name="useraccess" id="reg-useraccess" class="reg-useraccess">
+                <option value=""></option>
+                <option value="owner">Owner</option>
+                <option value="co-worker">Co - Worker</option>
+            </select><br><br>
+            <button type="submit"  class="login-btns">Register</button>
+            <button type="back" onclick="RegisterCancel()" class="login-btns">Back</button>
+
+            <div id="successRegister" style="display: none;"></div>
+
+        </form>
+    </div>
+
+    <footer>
+        <p class="center">
+            &copy; 2024 Collab Space. All rights reserved.
+        </p>
+    </footer>
+
+    <script src="register.js"></script>
+</body>
+
+</html>

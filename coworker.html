@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coworker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="header-main">
+        <div id="list-items">
+            <a href="#">Collab Space</a>
+            <ul class="nav-list">
+                <a href="coworker.html">Coworker Dashboard</a>
+                <a id="logoutBtn">Logout</a>
+                Welcome Coworker
+            </ul>
+        </div>
+    </header>
+
+        
+
+    <main>
+        <h2 class="dashboard-heading">Workspace and Rooms</h2><br>
+        <div class="button-container">
+            <button id="searchbtn" class="searchbtn" onclick="search()">Search</button>
+            <!-- View Rented Workspace Button -->
+            <button id="viewRentedWorkspaceBtn" class="viewRentedWorkspaceBtn" onclick="viewRentedWorkspaceBtn()">View Rented Workspace</button>
+        </div><br><br>
+        <table id="propertyTable">
+            <thead>
+                <tr>
+                    <th>Property ID</th>
+                    <th>Address</th>
+                    <th>Neighborhood</th>
+                    <th>Square Feet</th>
+                    <th>Parking</th>
+                    <th>Public Transportation</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Property data will be populated here -->
+            </tbody>
+        </table>
+    </main>
+
+    <div id="workspaceModal" class="modal">
+        <div class="modal-content">
+            <!-- Workspace details table will be dynamically generated here -->
+            <span id="closeBtn" class="close-btn">×</span>
+        </div>
+    </div>
+    
+    <!-- Image modal container -->
+    <div id="imageModal" class="modal">
+        <div id="enlargedImageContainer">
+            <img id="enlargedImage" src="#" alt="Enlarged Image">
+        </div>
+    </div>
+  
+
+
+    <footer>
+            <p class="center">
+                &copy; 2024 Collab Space. All rights reserved.
+            </p>
+    
+    </footer>
+
+    <script src="coworker.js"></script>
+</body>
+</html>

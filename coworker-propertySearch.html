@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coworker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="header-main">
+    <div id="list-items">
+        <a href="#">Collab Space</a>
+        <ul class="nav-list">
+            <a href="coworker.html">Coworker Dashboard</a>
+            <a id="logoutBtn">Logout</a>
+            Welcome Coworker
+        </ul>
+    </div>
+  </header>
+
+    <main>
+      <div class="property-table">
+        <h2 class="dashboard-heading">Search for Property and Work Space</h2>
+        <div class="form-container">
+          <div class="searchform">
+            <div class="form-group">
+              <label for="address">Address: </label>
+              <input type="text" id="address" name="address" />
+            </div>
+            <div class="form-group">
+              <label for="neighborhood">Neighborhood: </label>
+              <select id="neighborhood" name="neighborhood">
+                <option value="" disabled selected>Select</option>
+                <option value="Downtown">Downtown</option>
+                <option value="Industrial">Industrial</option>
+                <option value="Residential">Residential</option>   
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="minSquareFeet">Min Square Feet: </label>
+              <input type="number" id="minSquareFeet" placeholder="Min Square Feet">
+            </div>
+            <div class="form-group">
+              <label for="maxSquareFeet">Max Square Feet: </label>
+              <input type="number" id="maxSquareFeet" placeholder="Max Square Feet">
+            </div>
+            <div class="form-group">
+              <label for="parking">Parking: </label>
+              <select id="parking" name="parking">
+                <option value="" disabled selected>Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="publicTranspo">Public Transportation: </label>
+              <select id="publicTranspo" name="publicTranspo">
+                <option value="" disabled selected>Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="minCapacity">Min Seat Capacity: </label>
+              <input type="number" id="minCapacity" placeholder="Min Seat Capacity">
+            </div>
+            <div class="form-group">
+              <label for="maxCapacity">Max Seat Capacity: </label>
+              <input type="number" id="maxCapacity" placeholder="Max Seat Capacity">
+            </div>
+            <div class="form-group">
+              <label for="smoking">Smoking: </label>
+              <select id="smoking" name="smoking">
+                <option value="" disabled selected>Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fromDate">Available From:</label>
+              <input type="date" id="fromDate" name="fromDate">
+            </div>
+            <div class="form-group">
+              <label for="toDate">Available To:</label>
+              <input type="date" id="toDate" name="toDate">
+            </div>
+            <div class="form-group">
+              <label for="term">Lease Term: </label>
+              <select id="term" name="term">
+                <option value="" disabled selected>Select</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="minPrice">Min Price: </label>
+              <input type="number" id="minPrice" placeholder="Min Price">
+            </div>
+            <div class="form-group">
+              <label for="maxPrice">Max Price: </label>
+              <input type="number" id="maxPrice" placeholder="Max Price">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="search-button">
+        <div class="form-group">
+          <button id="searchBtn" class="btn">Search</button>
+          <button id="clearFiltersBtn" class="btn">Clear Filters</button>
+        </div>
+      </div>
+
+      <hr class="property-hr" />
+      <h3>Search Results:</h3><br>
+      
+      <div class="sort-button-container">
+        <button id="sortButton" onclick="SortTable('Neighborhood')">Sort by Neighborhood</button>
+      </div>
+
+      <table id="propertyTable">
+        <thead>
+          <tr>
+            <th>Property ID</th>
+            <th>Address</th>
+            <th>Neighborhood</th>
+            <th>Square Feet</th>
+            <th>Parking</th>
+            <th>Public Transportation</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="propertyDataTable">
+          <!-- Table rows will be added dynamically here -->
+        </tbody>
+      </table>
+
+      <br><br>
+    </main>
+
+    <footer>
+        <p class="center">
+            &copy; 2024 Collab Space. All rights reserved.
+        </p>
+    </footer>
+
+<script src="coworker-propSearch.js"></script>
+</body>
+</html>
