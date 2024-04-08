@@ -12,13 +12,14 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: E6E2DD;
+    background-color: #E6E2DD;
 }
 
 header {
     background-color: #D48166;
     color: white;
-    text-align: center;
+    text-align: right;
+    /* Adjusted to align text to the right */
     padding: 5px;
     position: fixed;
     top: 0;
@@ -69,19 +70,6 @@ section {
     text-align: center;
 }
 
-/* 
-footer {
-    background-color: #D48166;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    margin-top: 200px;
-} */
-
 
 table,
 th,
@@ -123,11 +111,11 @@ header {
     background-color: #f99573;
     color: white;
     padding: 5px;
-    position: fixed;
+    
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 500;
 }
 
 section {
@@ -199,6 +187,7 @@ footer {
     color: white;
     font-size: 15px !important;
 }
+
 /* search form container*/
 .form-container {
     background-color: #f4f4f4;
