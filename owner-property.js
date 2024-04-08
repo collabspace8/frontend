@@ -1,132 +1,123 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Retrieve existing property data from session storage or initialize an empty array if none exists
-  let propertyData = JSON.parse(sessionStorage.getItem("propertyData")) || [];
-
   const propertyTableBody = document.getElementById("propertyBody");
+  const confirmationModal = document.getElementById("confirmationModal");
+  const confirmDeleteBtn = document.getElementById("confirmDelete");
+  const cancelDeleteBtn = document.getElementById("cancelDelete");
+  let propertyIdToDelete = null;
+
+  // Function to fetch property data from the backend API
+  const fetchPropertyData = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/properties");
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching property data:", error);
+      return [];
+    }
+  };
 
   // Function to append data to the table
-  const appendData = () => {
-    propertyTableBody.innerHTML = ""; // Clear previous data
+  const appendData = async () => {
+    try {
+      // Fetch property data from the backend
+      const propertyData = await fetchPropertyData();
 
-    // Append data from propertyData array
-    propertyData.forEach((property) => {
-      appendRow(property);
-    });
+      // Clear previous data
+      propertyTableBody.innerHTML = "";
+
+      // Append data to the table
+      propertyData.forEach((property) => {
+        appendRow(property);
+      });
+    } catch (error) {
+      console.error("Error appending data:", error);
+    }
   };
 
   // Function to append a single row to the table
   const appendRow = (property) => {
     const newRow = document.createElement("tr");
-    newRow.setAttribute("data-property-id", property.propertyId);
 
     newRow.innerHTML = `
-      <td>${property.propertyId}</td>
+      <td>${property._id}</td>
       <td>${property.address}</td>
       <td>${property.neighborhood}</td>
       <td>${property.squarefeet}</td>
       <td>${property.parking}</td>
       <td>${property.publicTranspo}</td>
       <td>
-        <button class="editPropertyBtn" data-property-id="${property.propertyId}">Edit</button>
-        <button class="deleteBtn">Delete</button>
-        <button class="addWorkspaceBtn" onclick="location.href='add-workspace.html?propertyId=${property.propertyId}'">Add Workspace</button>
-        <button class="viewWorkspaceBtn" onclick="location.href='owner-workspace.html'">View Workspace</button>
+        <button class="editPropertyBtn" data-property-id="${property._id}">Edit</button>
+        <button class="deleteBtn" data-property-id="${property._id}">Delete</button>
+        <button class="addWorkspaceBtn" data-property-id="${property._id}">Add Workspace</button>
+        <button class="viewWorkspaceBtn" data-property-id="${property._id}">View Workspace</button>
       </td>
     `;
     propertyTableBody.appendChild(newRow);
 
-    // Attach click event handler for the delete button in this row
+    // Attach click event handlers for buttons
+    const editButton = newRow.querySelector(".editPropertyBtn");
+    editButton.addEventListener("click", () => {
+      const propertyId = editButton.getAttribute("data-property-id");
+      window.location.href = `edit-property.html?propertyId=${propertyId}`;
+    });
+
+    const addButton = newRow.querySelector(".addWorkspaceBtn");
+    addButton.addEventListener("click", () => {
+      const propertyId = addButton.getAttribute("data-property-id");
+      window.location.href = `add-workspace.html?propertyId=${propertyId}`;
+    });
+
+    const viewButton = newRow.querySelector(".viewWorkspaceBtn");
+    viewButton.addEventListener("click", () => {
+      const propertyId = viewButton.getAttribute("data-property-id");
+      window.location.href = `owner-workspace.html?propertyId=${propertyId}`;
+    });
+
     const deleteButton = newRow.querySelector(".deleteBtn");
     deleteButton.addEventListener("click", () => {
-      const row = deleteButton.closest("tr"); // Get the closest table row
-      const propertyId = row.getAttribute("data-property-id");
-
-      // Show the confirmation modal
-      modal.style.display = "block";
-
-      // Handle confirm delete
-      document.getElementById("confirmDelete").addEventListener("click", () => {
-        // Remove the property from propertyData array
-        propertyData = propertyData.filter(
-          (property) => property.propertyId.toString() !== propertyId
-        );
-
-        // Update sessionStorage
-        sessionStorage.setItem("propertyData", JSON.stringify(propertyData));
-
-        // Remove the row from the table
-        row.remove();
-
-        // Close the modal
-        modal.style.display = "none";
-      });
-
-      // Handle cancel delete
-      document.getElementById("cancelDelete").addEventListener("click", () => {
-        // Close the modal
-        modal.style.display = "none";
-      });
+      propertyIdToDelete = property._id;
+      confirmationModal.style.display = "block";
     });
   };
 
-  // Handle add button click
+  // Event listener for the confirm delete button
+  confirmDeleteBtn.addEventListener("click", async () => {
+    if (propertyIdToDelete) {
+      try {
+        // Send a DELETE request to the backend API to delete the property
+        const response = await fetch(`http://localhost:3000/properties/${propertyIdToDelete}`, {
+          method: "DELETE",
+        });
+
+        // Check if the deletion was successful
+        if (response.ok) {
+          // Remove the row from the table
+          document.querySelector(`[data-property-id="${propertyIdToDelete}"]`).parentNode.remove();
+          console.log("Property deleted successfully");
+        } else {
+          console.error("Failed to delete property:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error deleting property:", error);
+      } finally {
+        confirmationModal.style.display = "none";
+        propertyIdToDelete = null;
+      }
+    }
+  });
+
+  // Event listener for the cancel delete button
+  cancelDeleteBtn.addEventListener("click", () => {
+    confirmationModal.style.display = "none";
+    propertyIdToDelete = null;
+  });
+
+  // Event listener for the add property button
   document.getElementById("addPropertyBtn").addEventListener("click", () => {
     window.location.href = "add-property.html";
   });
 
-  // Event delegation for handling clicks on dynamically created buttons
-  document.getElementById("propertyBody").addEventListener("click", (event) => {
-    if (event.target.classList.contains("editPropertyBtn")) {
-      event.preventDefault();
-      const propertyId = event.target.getAttribute("data-property-id");
-
-      const propertyToEdit = propertyData.find(
-        (property) => property.propertyId.toString() === propertyId
-      );
-      if (propertyToEdit) {
-        sessionStorage.setItem(
-          "propertyToEdit",
-          JSON.stringify(propertyToEdit)
-        );
-        // Navigate to edit page
-        window.location.href = "edit-property.html";
-      }
-    } else if (event.target.classList.contains("deleteBtn")) {
-      // Delete button clicked
-      const row = event.target.closest("tr"); // Get the closest table row
-      const propertyId = row.getAttribute("data-property-id");
-
-      // Remove the property from propertyData array
-      propertyData = propertyData.filter(
-        (property) => property.propertyId.toString() !== propertyId
-      );
-
-      // Update sessionStorage
-      sessionStorage.setItem("propertyData", JSON.stringify(propertyData));
-
-      // Remove the row from the table
-      row.remove();
-    }
-  });
-
   // Initial data append
   appendData();
-
-  // Get the modal
-  const modal = document.getElementById("confirmationModal");
-
-  // Get the <span> element that closes the modal
-  const span = document.querySelector(".close");
-
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function () {
-    modal.style.display = "none";
-  };
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
 });
