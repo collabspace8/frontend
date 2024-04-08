@@ -1,49 +1,50 @@
-const users = [
-    { username: 'owner', password: 'test123', access: 'owner' },
-    { username: 'coworker', password: 'test123', access: 'coworker' }
-];
-
-document.addEventListener('DOMContentLoaded', function () {
-    const loginForm = document.getElementById('login-form');
-    const errorMessage = document.getElementById('login-error-message');
-
-    loginForm.addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent default form submission
-        LoginBtn(); // Call LoginBtn function
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  const loginButton = document.getElementById("login-button");
+  loginButton.addEventListener("click", LoginBtn);
 });
 
 function LoginBtn() {
-    var username = document.getElementById('login-user').value;
-    var password = document.getElementById('login-password').value;
+  var username = document.getElementById("login-user").value;
+  var password = document.getElementById("login-password").value;
+  console.log("username", username);
+  console.log("password", password);
 
-    // Find the user in the array
-    const user = users.find(user => user.username === username && user.password === password);
+  fetch("/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password }),
+    
+  })
+  
+    .then((response) => {
+       console.log("username", username);
+       console.log("password", password);
+      if (!response.ok) {
+         console.log("username", username);
+         console.log("password", password);
+        throw new Error("Invalid username or password");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Redirect based on user role
+      console.log("data", data);
 
-    if (user) {
-        // Check if both username and password are correct
-        if (user.username === username && user.password === password) {
-            // Redirect based on user access
-            if (user.access === 'owner') {
-                window.location.href = 'owner-property.html';
-            } else if (user.access === 'coworker') {
-                window.location.href = 'coworker.html';
-            }
-        } else {
-            // Handle incorrect password here
-            const errorMessage = document.getElementById('login-error-message');
-            errorMessage.textContent = 'Incorrect password';
-            errorMessage.style.display = 'block'; // Ensure the error message is visible
+      if (data && data.user) {
+        if (data.user.role === "owner") {
+          window.location.href = "owner-property.html";
+        } else if (data.user.role === "co-worker") {
+          window.location.href = "coworker.html";
         }
-    } else {
-        // Handle invalid username here
-        const errorMessage = document.getElementById('login-error-message');
-        errorMessage.textContent = 'Invalid username';
-        errorMessage.style.display = 'block'; // Ensure the error message is visible
-    }
-}
-
-//Function to go back to Homepage
-function LoginBackBtn() {
-    window.location.href = "homepage.html";
+      } else {
+        throw new Error("User not found");
+      }
+    })
+    .catch((error) => {
+      const errorMessage = document.getElementById("login-error-message");
+      errorMessage.textContent = error.message;
+      errorMessage.style.display = "block";
+    });
 }
