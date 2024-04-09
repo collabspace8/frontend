@@ -55,7 +55,6 @@ header {
   display: inline-block;
   padding: 0 20px;
   text-decoration: none;
-  color: #373A36;
   font-size: 30px;
   transition: all 0.2s ease-in-out;
 }
@@ -81,30 +80,29 @@ footer {
 }
 
 
-
-#dashboard-header {
+header {
+  background-color: #D48166;
+  color: rgb(255, 255, 255);
   text-align: right;
-  overflow: hidden;
+  padding: 5px;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
-
-#list-items {
-  text-align: center;
+#header-main {
+  background-color: #f99573;
+  color: white;
+  padding: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
-#list-items a {
-  float: left;
-  display: block;
-  padding: 0 20px;
-  text-decoration: none;
-  color: #373A36;
-  font-size: 30px;
-  transition: all 0.2s ease-in-out;
-}
-
-#list-items a:hover {
-  color: #fff;
-  cursor: pointer;
+th {
+  text-align: left;
 }
 
 table,
@@ -527,7 +525,7 @@ main {
 }
 
 .sort-button-container {
-  text-align: right;
+  text-align: center;
   margin-bottom: 20px;
 }
 

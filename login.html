@@ -11,15 +11,14 @@
 <body>
     <header id="header-main">
         <div id="list-items">
-            <a href="#">Collab Space</a>
+            <span class="collab-space">Collab Space</span>
             <ul class="nav-list">
-                <a href="index.html">Home</a>
-                <a href="register.html">Register</a>
-                <a href="login.html">Login</a>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="login.html">Login</a></li>
             </ul>
         </div>
-    </header> 
-
+    </header>
     <div class="login-container">
         <form class="login-form" id="login-form">
             <h1>Login</h1>
@@ -30,18 +29,16 @@
             <label for="login-password">Password: </label><br>
             <input type="password" id="login-password" name="password" class="input-field" required
                 autocomplete="current-password"><br>
-            <button type="submit">Login</button>
+            <button type="button" id="login-button">Login</button>
             <button type="button" onclick="LoginBackBtn()">Cancel</button><br><br>
             <div id="login-error-message" style="display: none;"></div>
         </form>
     </div>
-
     <footer>
         <p class="center">
             &copy; 2024 Collab Space. All rights reserved.
         </p>
     </footer>
-
     <script src="login.js"></script>
 </body>
 
