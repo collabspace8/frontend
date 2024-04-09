@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 * {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display', serif; 
 }
 
 * {
@@ -14,77 +14,12 @@
 body {
     background-color: white;
     background-size: cover;
-    background-position: center;
-    margin: 0;
+    background-position: center; 
+    margin: 0; 
     padding: 0;
     position: relative;
     background-repeat: no-repeat;
     height: 100vh;
-}
-
-header {
-    background-color: #D48166;
-    color: white;
-    text-align: right;
-    /* Adjusted to align text to the right */
-    padding: 5px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
-.nav-list {
-    list-style-type: none;
-    margin-right: 10px;
-}
-
-.nav-list li {
-    display: inline-block;
-    margin-left: 10px;
-}
-
-.nav-list li:first-child {
-    margin-left: 0;
-}
-
-.nav-list a {
-    text-decoration: none;
-    color: white;
-    font-size: 15px !important;
-}
-
-#list-items {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#list-items a {
-    display: inline-block;
-    padding: 0 20px;
-    text-decoration: none;
-    font-size: 30px;
-    transition: all 0.2s ease-in-out;
-}
-
-#list-items a:hover {
-    color: #fff;
-    cursor: pointer;
-}
-
-section {
-    margin-top: 70px;
-    text-align: center;
-}
-
-footer {
-    background-color: #f99573;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }
 
 header {
@@ -101,11 +36,26 @@ header {
     background-color: #f99573;
     color: white;
     padding: 5px;
-
-    top: 0;
-    left: 0;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
     width: 100%;
-    z-index: 500;
+    z-index: 1000; 
+}
+
+section {
+    margin-top: 70px;
+    text-align: center;
+}
+
+footer {
+    background-color: #f99573;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 #dashboard-header {
@@ -134,22 +84,22 @@ header {
 }
 
 .collab-space {
-    margin-left: 10px;
+    margin-left: 10px; 
     font-size: 40px;
 }
 
 .nav-list {
     list-style-type: none;
-    margin-right: 10px;
+    margin-right: 10px; 
 }
 
 .nav-list li {
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 10px; 
 }
 
 .nav-list li:first-child {
-    margin-left: 0;
+    margin-left: 0; 
 }
 
 .nav-list a {
@@ -181,10 +131,10 @@ tr:nth-child(even) {
 /*style for homepage*/
 /* Style for individual images */
 .image-gallery-container {
-    background-color: #fcf9f8;
+    background-color: #fcf9f8; 
     padding-top: 100px;
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     position: relative;
     top: 0;
     left: 0;
@@ -218,7 +168,6 @@ tr:nth-child(even) {
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
@@ -229,7 +178,6 @@ tr:nth-child(even) {
         transform: translateX(-50px);
         opacity: 0;
     }
-
     to {
         transform: translateX(0);
         opacity: 1;
@@ -282,8 +230,8 @@ table img {
 
 /* about page css */
 .about-section {
-    color: #7e2702;
-    position: fixed;
+    color:#7e2702;
+    position:fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -304,7 +252,6 @@ table img {
         opacity: 0;
         transform: translate(-50%, -60%);
     }
-
     to {
         opacity: 1;
         transform: translate(-50%, -50%);
@@ -317,7 +264,7 @@ table img {
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
     text-align: center;
 }
@@ -326,7 +273,7 @@ table img {
 .register-form {
     color: #BA5A31;
     width: 450px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.8); 
     padding: 15px;
     border: 1px solid gray;
     border-radius: 5px;
@@ -335,11 +282,11 @@ table img {
 
 .register-form h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
 }
 
 #success-message {
-    text-align: center;
+    text-align: center; 
 }
 
 .login-form h1 {
@@ -348,12 +295,12 @@ table img {
 }
 
 .input-field {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 10px; 
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box;
+    box-sizing: border-box; 
 }
 
 .input-field input,
@@ -455,6 +402,7 @@ table img {
 
 .searchbtn:hover {
     background-color: #555
+
 }
 
 main {
@@ -478,7 +426,7 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(calc(50% - 20px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(calc(50% - 20px), 1fr)); 
     grid-gap: 40px;
 }
 
@@ -552,42 +500,27 @@ main {
 .workspace-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    /* Center the items on the page */
-    gap: 20px;
-    /* Optional: Adds space between items */
+    justify-content: center; /* Center the items on the page */
+    gap: 20px; /* Optional: Adds space between items */
 }
 
 .workspace-item {
-    flex: 1;
-    /* Items will grow to fill the available space */
-    min-width: 250px;
-    /* Minimum width for each item before wrapping */
-    max-width: 300px;
-    /* Maximum width for each item */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    /* Optional: Adds a shadow for some depth */
-    border-radius: 10px;
-    /* Optional: Rounds the corners of the item boxes */
-    overflow: hidden;
-    /* Ensures the content fits within the borders */
-    background-color: #ffffff;
-    /* Background color for each workspace item */
-    padding: 15px;
-    /* Padding inside each item */
-    margin-bottom: 20px;
-    /* Space below each item */
+    flex: 1; /* Items will grow to fill the available space */
+    min-width: 250px; /* Minimum width for each item before wrapping */
+    max-width: 300px; /* Maximum width for each item */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow for some depth */
+    border-radius: 10px; /* Optional: Rounds the corners of the item boxes */
+    overflow: hidden; /* Ensures the content fits within the borders */
+    background-color: #ffffff; /* Background color for each workspace item */
+    padding: 15px; /* Padding inside each item */
+    margin-bottom: 20px; /* Space below each item */
 }
 
 .workspace-item img {
-    width: 100%;
-    /* Make the image fill the container width */
-    height: 200px;
-    /* Fixed height for all images */
-    object-fit: cover;
-    /* Cover the container without losing the aspect ratio */
-    border-bottom: 1px solid #eee;
-    /* Optional: Adds a line between the image and the text */
+    width: 100%; /* Make the image fill the container width */
+    height: 200px; /* Fixed height for all images */
+    object-fit: cover; /* Cover the container without losing the aspect ratio */
+    border-bottom: 1px solid #eee; /* Optional: Adds a line between the image and the text */
 }
 
 .workspace-item h3 {
@@ -597,3 +530,4 @@ main {
 .workspace-item p {
     text-align: left;
 }
+

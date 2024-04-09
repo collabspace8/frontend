@@ -55,6 +55,7 @@ header {
   display: inline-block;
   padding: 0 20px;
   text-decoration: none;
+  color: #373A36;
   font-size: 30px;
   transition: all 0.2s ease-in-out;
 }
@@ -80,29 +81,30 @@ footer {
 }
 
 
-header {
-  background-color: #D48166;
-  color: rgb(255, 255, 255);
+
+#dashboard-header {
   text-align: right;
-  padding: 5px;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  overflow: hidden;
 }
 
-#header-main {
-  background-color: #f99573;
-  color: white;
-  padding: 5px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+
+#list-items {
+  text-align: center;
 }
 
-th {
-  text-align: left;
+#list-items a {
+  float: left;
+  display: block;
+  padding: 0 20px;
+  text-decoration: none;
+  color: #373A36;
+  font-size: 30px;
+  transition: all 0.2s ease-in-out;
+}
+
+#list-items a:hover {
+  color: #fff;
+  cursor: pointer;
 }
 
 table,
@@ -525,7 +527,7 @@ main {
 }
 
 .sort-button-container {
-  text-align: center;
+  text-align: right;
   margin-bottom: 20px;
 }
 
