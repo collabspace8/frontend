@@ -1,90 +1,76 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const workspaceForm = document.getElementById("workspaceForm");
-  const propertyWorkspaceData =
-    JSON.parse(sessionStorage.getItem("propertyWorkspaceData")) || {};
+  const form = document.getElementById("editForm");
 
-  // Retrieve propertyId from URL parameter
+  // Get the property ID from the URL query parameter
   const urlParams = new URLSearchParams(window.location.search);
   const propertyId = urlParams.get("propertyId");
 
-  // Function to populate form fields with workspace data
-  const populateFormFields = (workspaceId) => {
-    const workspace = findWorkspaceById(
-      propertyWorkspaceData[propertyId],
-      workspaceId
-    );
-    if (workspace) {
-      document.getElementById("workspaceId").value = workspace.workspaceId;
-      document.getElementById("type").value = workspace.type;
-      document.getElementById("capacity").value = workspace.capacity;
-      document.getElementById("smoking").value = workspace.smoking;
-      document.getElementById("available").value = workspace.available;
-      document.getElementById("term").value = workspace.term;
-      document.getElementById("price").value = workspace.price;
-    } else {
-      console.error("Workspace not found for the given workspaceId.");
+  // Fetch property details from the database
+  fetchPropertyDetails(propertyId);
+
+  async function fetchPropertyDetails(propertyId) {
+    try {
+      const response = await fetch(`http://localhost:3000/properties/${propertyId}`);
+      const propertyData = await response.json();
+      
+      // Populate form fields with the retrieved data
+      populateFormFields(propertyData);
+    } catch (error) {
+      console.error("Error fetching property details:", error);
     }
-  };
+  }
+
+  // Function to populate form fields with property data
+  function populateFormFields(propertyData) {
+    document.getElementById("propertyId").value = propertyData.propertyId; // Use _id from the database
+    document.getElementById("address").value = propertyData.address;
+    document.getElementById("neighborhood").value = propertyData.neighborhood;
+    document.getElementById("squarefeet").value = propertyData.squarefeet;
+    document.getElementById("parking").value = propertyData.parking;
+    document.getElementById("publicTranspo").value = propertyData.publicTranspo;
+  }
 
   // Handle form submission
-  workspaceForm.addEventListener("submit", (e) => {
-    e.preventDefault(); // Prevent form submission
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    // Retrieve input values from the form
-    const workspaceId = document.getElementById("workspaceId").value;
-    const type = document.getElementById("type").value;
-    const capacity = document.getElementById("capacity").value;
-    const smoking = document.getElementById("smoking").value;
-    const available = document.getElementById("available").value;
-    const term = document.getElementById("term").value;
-    const price = document.getElementById("price").value;
-
-    // Update the workspace data in propertyWorkspaceData
-    const workspaces = propertyWorkspaceData[propertyId];
-    const index = workspaces.findIndex(
-      (workspace) => workspace.workspaceId === workspaceId
-    );
-    if (index !== -1) {
-      workspaces[index] = {
-        workspaceId,
-        type,
-        capacity,
-        smoking,
-        available,
-        term,
-        price,
+    try {
+      // Collect updated property data from the form
+      const updatedProperty = {
+        address: form.address.value,
+        neighborhood: form.neighborhood.value,
+        squarefeet: form.squarefeet.value,
+        parking: form.parking.value,
+        publicTranspo: form.publicTranspo.value
       };
+
+      // Send updated property data to the backend API to update in the database
+      const response = await fetch(`http://localhost:3000/properties/${propertyId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedProperty)
+      });
+
+      // Check if the update was successful
+      if (response.ok) {
+        console.log("Property updated successfully");
+        // Redirect to the owner-property.html page
+        window.location.href = "owner-property.html";
+      } else {
+        // Log error message if update fails
+        console.error("Failed to update property:", response.statusText);
+      }
+    } catch (error) {
+      // Log any errors that occur during the update process
+      console.error("Error updating property:", error);
     }
-
-    // Save the updated propertyWorkspaceData to session storage
-    sessionStorage.setItem(
-      "propertyWorkspaceData",
-      JSON.stringify(propertyWorkspaceData)
-    );
-
-    // Redirect to the owner-workspace.html page
-    window.location.href = "owner-workspace.html";
   });
 
   // Handle back button click
   document.getElementById("backEdit").addEventListener("click", () => {
-    // Redirect to the owner-workspace.html page
-    window.location.href = "owner-workspace.html";
+    // Redirect to the owner-property.html page
+    window.location.href = "owner-property.html";
   });
-
-  // Handle edit button click in the workspace table
-  document
-    .getElementById("workspaceBody")
-    .addEventListener("click", (event) => {
-      if (event.target.classList.contains("editWorkspaceBtn")) {
-        event.preventDefault();
-        const workspaceId = event.target.dataset.workspaceId;
-        populateFormFields(workspaceId);
-      }
-    });
 });
-
-// Function to find a workspace by ID within an array of workspaces
-const findWorkspaceById = (workspaces, workspaceId) => {
-  return workspaces.find((workspace) => workspace.workspaceId === workspaceId);
-};

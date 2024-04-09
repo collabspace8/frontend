@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to populate form fields with property data
   function populateFormFields(propertyData) {
-    document.getElementById("propertyId").value = propertyData._id; // Use _id from the database
+    document.getElementById("propertyId").value = propertyData.propertyId; // Use _id from the database
     document.getElementById("address").value = propertyData.address;
     document.getElementById("neighborhood").value = propertyData.neighborhood;
     document.getElementById("squarefeet").value = propertyData.squarefeet;

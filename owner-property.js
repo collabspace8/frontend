@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const newRow = document.createElement("tr");
 
     newRow.innerHTML = `
-      <td>${property._id}</td>
       <td>${property.address}</td>
       <td>${property.neighborhood}</td>
       <td>${property.squarefeet}</td>
@@ -61,19 +60,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const propertyId = editButton.getAttribute("data-property-id");
       window.location.href = `edit-property.html?propertyId=${propertyId}`;
     });
-
+  
+    // Event listener for the "Add Workspace" button
     const addButton = newRow.querySelector(".addWorkspaceBtn");
     addButton.addEventListener("click", () => {
       const propertyId = addButton.getAttribute("data-property-id");
       window.location.href = `add-workspace.html?propertyId=${propertyId}`;
     });
-
+  
     const viewButton = newRow.querySelector(".viewWorkspaceBtn");
     viewButton.addEventListener("click", () => {
       const propertyId = viewButton.getAttribute("data-property-id");
       window.location.href = `owner-workspace.html?propertyId=${propertyId}`;
     });
-
+  
     const deleteButton = newRow.querySelector(".deleteBtn");
     deleteButton.addEventListener("click", () => {
       propertyIdToDelete = property._id;
