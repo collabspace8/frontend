@@ -45,5 +45,5 @@ function LoginBtn() {
 
 //Function to go back to Homepage
 function LoginBackBtn() {
-    window.location.href = "homepage.html";
+    window.location.href = "index.html";
 }

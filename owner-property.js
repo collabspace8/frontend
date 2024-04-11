@@ -81,31 +81,37 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // Event listener for the confirm delete button
-  confirmDeleteBtn.addEventListener("click", async () => {
-    if (propertyIdToDelete) {
-      try {
-        // Send a DELETE request to the backend API to delete the property
-        const response = await fetch(`http://localhost:3000/properties/${propertyIdToDelete}`, {
-          method: "DELETE",
-        });
+// Event listener for the confirm delete button
+confirmDeleteBtn.addEventListener("click", async () => {
+  if (propertyIdToDelete) {
+    try {
+      // Send a DELETE request to the backend API to delete the property
+      const response = await fetch(`http://localhost:3000/properties/${propertyIdToDelete}`, {
+        method: "DELETE",
+      });
 
-        // Check if the deletion was successful
-        if (response.ok) {
-          // Remove the row from the table
-          document.querySelector(`[data-property-id="${propertyIdToDelete}"]`).parentNode.remove();
-          console.log("Property deleted successfully");
-        } else {
-          console.error("Failed to delete property:", response.statusText);
+      // Check if the deletion was successful
+      if (response.ok) {
+        // Select the delete button related to this propertyId
+        const deleteBtnForProperty = document.querySelector(`button.deleteBtn[data-property-id="${propertyIdToDelete}"]`);
+        // Use closest() to find the <tr> ancestor of the delete button and remove it
+        if (deleteBtnForProperty) {
+          deleteBtnForProperty.closest("tr").remove();
         }
-      } catch (error) {
-        console.error("Error deleting property:", error);
-      } finally {
-        confirmationModal.style.display = "none";
-        propertyIdToDelete = null;
+        console.log("Property deleted successfully");
+      } else {
+        console.error("Failed to delete property:", response.statusText);
       }
+    } catch (error) {
+      console.error("Error deleting property:", error);
+    } finally {
+      confirmationModal.style.display = "none";
+      propertyIdToDelete = null;
     }
-  });
+  }
+});
+
+
 
   // Event listener for the cancel delete button
   cancelDeleteBtn.addEventListener("click", () => {

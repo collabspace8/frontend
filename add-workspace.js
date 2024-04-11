@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle save button click
   document.getElementById("saveWorkspaceBtn")?.addEventListener("click", () => {
-    window.location.href = "owner-workspace.html";
+    window.location.href = "owner-property.html";
   });
 
   // Handle back button click

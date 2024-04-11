@@ -36,10 +36,10 @@ function populatePropertyTable() {
       propertyData.forEach(function(property) {
         var row = propertyTable.insertRow();
         row.innerHTML = `
-          <td>${property.propertyId}</td>
+        <td class="hidden">${property.propertyId}</td>
           <td>${property.address}</td>
           <td>${property.neighborhood}</td>
-          <td>${property.squareFeet}</td>
+          <td>${property.squarefeet}</td>
           <td>${property.parking}</td>
           <td>${property.publicTranspo}</td>
           <td><button class="button" onclick="viewAvailableWorkspaces(${property.propertyId})">View Available Workspaces</button></td>
@@ -64,7 +64,6 @@ function viewAvailableWorkspaces(propertyId) {
   var header = table.createTHead();
   var headerRow = header.insertRow();
   headerRow.innerHTML = `
-    <th>Workspace ID</th>
     <th>Type</th>
     <th>Capacity</th>
     <th>Smoking Allowed</th>
